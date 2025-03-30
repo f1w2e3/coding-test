@@ -1,6 +1,6 @@
 #문제 1 : 안녕하세요를 3번 출력하는 코드를 작성하세요.
 
-for_in range(3)
+for _ in range(3)
     print("안녕하세요")
 
 
