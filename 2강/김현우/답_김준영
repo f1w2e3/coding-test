@@ -1,0 +1,34 @@
+; 문제1. 주어진 배열에서 가장 작은 수의 합을 구하세요
+; A = [1, 2, 3] , B = [3, 2 1]
+'''
+small_num=0
+A = [1,2,3]  
+B = [3, 2, 1]
+
+
+def f(nums,small_num):
+    for _ in range(len(nums)):
+        if small_num>nums[_]:
+              small_num=nums[_]
+    return small_num
+
+print(f(A,A[0])+f(B,B[0]))
+'''
+
+
+; 문제2. 500원, 50원, 10원 동전이 있을 때, 주어진 금액을 거슬러 주기 위해 필요한 최소 동전 개수를 구하시오.
+; 금액:1580
+'''
+total=int(input("금액을 입력하세요"))
+unit=input("동전 단위들을 작은 금액부터 입력하세요. 예: (1,100,200,400)")
+
+unitarray=list(map(int,unit.strip("()").split(",")))
+
+def greedy(x,num,total):
+    num=num+total//unitarray[x-1]
+    total=total%unitarray[x-1]
+    return greedy(x-1,num,total) if x>=2 else num
+
+num=greedy(len(unitarray),0,total)
+print(f"{total}원을 만들기 위한 최소 동전 개수는 {num}개 입니다")
+'''
