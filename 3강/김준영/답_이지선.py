@@ -10,6 +10,16 @@
 # is_valid_parentheses("(()") ➞ False  
 # is_valid_parentheses(")(") ➞ False
 
+def is_valid_parentheses(s):
+    count = 0
+    for char in s:
+        if char == '(':
+            count += 1
+        elif char == ')':
+            count -= 1
+        if count < 0:
+            return False
+    return count == 0
 
 
 # #문제2.
@@ -27,3 +37,10 @@
 # +1 -1 +1 +1 +1 = 3
 # -1 +1 +1 +1 +1 = 3
 # +1 +1 +1 +1 -1 = 3
+
+def count_ways(numbers, target):
+    def dfs(i, total):
+        if i == len(numbers):
+            return 1 if total == target else 0
+        return dfs(i + 1, total + numbers[i]) + dfs(i + 1, total - numbers[i])
+    return dfs(0, 0)
