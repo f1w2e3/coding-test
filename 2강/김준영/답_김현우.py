@@ -1,3 +1,4 @@
+
 #문제1. 그리디 알고리즘과 최적해의 조건
 #다음 프로그램은 사용자로부터 금액과 동전 단위들을 입력받습니다. 
 #(입력 조건: 동전 단위는 1원을 포함하여 2개 이상의 단위들을 오름차순으로 입력받음)
@@ -24,26 +25,21 @@ print(f"{total}원을 만들기 위한 최소 동전 개수는 {num}개 입니�
 # (4). (1,5,25,75,150)
 # (5). (1,17,170,340)
 
-(2)
-(3)
+정답: 2,3,4
 
 #문제2. 재귀함수
 #사용자로부터 입력받은 n개의 정수를 원소로 갖는 집합의 모든 부분집합들을 출력하는 프로그램을 작성하세요.
 #조건: 재귀함수를 사용하여 구현하기
 
-def print_subsets(arr, idx, subset):
-    if idx == len(arr):
-        print(subset)
+def generate_subsets(arr, index, current):
+    if index == len(arr):
+        print(current)
         return
+    generate_subsets(arr, index + 1, current)
+    generate_subsets(arr, index + 1, current + [arr[index]])
 
-    print_subsets(arr, idx + 1, subset)
+n = int(input("원소 개수 입력: "))
+elements = list(map(int, input(f"{n}개의 정수를 공백으로 입력: ").split()))
 
-    subset.append(arr[idx])
-    print_subsets(arr, idx + 1, subset)
-    subset.pop()
-
-n = int(input("집합의 원소 개수 입력: "))
-arr = list(map(int, input("집합의 원소들 입력: ")))
-
-print("모든 부분집합: ")
-print_subsets(arr, 0, [])
+print("모든 부분집합:")
+generate_subsets(elements, 0, [])
