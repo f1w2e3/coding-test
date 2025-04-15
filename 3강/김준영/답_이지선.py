@@ -11,7 +11,7 @@
 # is_valid_parentheses(")(") ➞ False
 
 def is_valid_parentheses(s):
-    count = 0
+    count = 0  
     for char in s:
         if char == '(':
             count += 1
