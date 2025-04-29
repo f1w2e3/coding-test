@@ -5,11 +5,11 @@
 1.
 case1)의 경우 실제 작동원리:
 컴파일 타임때 LEGB룰에 따라 함수 내 b는 지역변수로 스캔됨.
-함수 네내 "b" 이름은 PyObject *co_varnames;에 저장되고
+함수 내 "b" 이름은 PyObject *co_varnames;에 저장되고
 b가 가리키는 int겍체 x1은 PyLong_FromLong(2)을 통해 참조카운트 1으로 생성되며 그 주소가 PyObject **f_localsplus;에 저장됨.
-함수 f() 스코프 안에서 생성된 PyCodeObject와 PyFrameObject는 함수가 종료시 사라짐.
+함수 f() 스코프 안에서 생성된 PyFrameObject는 함수가 종료시 사라짐.
 함수 종료시 인터프리터는 int객체x1에 대해 Py_DECREF를 통해 참조카운트를 1감소시키고 int객체x1은 참조카운트가 0으로 되면
-gc기 int겍체x1을 수거함.
+gc가 int겍체x1을 수거함.
 함수 외부에서 print(b)를 했을때 이 b는 f()의 f_localsplus가 아니라 전역 스코프의 f_localsplus를 참조함.
 전역 스코프의 f_localsplus는 함수 내에서 수정되지 않았으므로 print(b)하면 변경되지 않은 값 1이 출력됨.
 
