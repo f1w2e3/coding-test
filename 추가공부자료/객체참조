@@ -1,13 +1,11 @@
 오류 정정:
-1.참조 관계가 끊어진다는 표현의 모호함
+1.함수 밖에서 참조 관계가 끊어진다는 표현 정정
 2.튜플 수정이 불가능함.
 
 1.
-case1)의 경우:
-함수 밖에서 b->int객체 x1 참조가 끊어진다는 표현이 불완전하다.
-실제 작동원리:
+case1)의 경우 실제 작동원리:
 컴파일 타임때 LEGB룰에 따라 함수 내 b는 지역변수로 스캔됨.
-함수 네 "b" 이름은 PyObject *co_varnames;에 저장되고
+함수 네내 "b" 이름은 PyObject *co_varnames;에 저장되고
 b가 가리키는 int겍체 x1은 PyLong_FromLong(2)을 통해 참조카운트 1으로 생성되며 그 주소가 PyObject **f_localsplus;에 저장됨.
 함수 f() 스코프 안에서 생성된 PyCodeObject와 PyFrameObject는 함수가 종료시 사라짐.
 함수 종료시 인터프리터는 int객체x1에 대해 Py_DECREF를 통해 참조카운트를 1감소시키고 int객체x1은 참조카운트가 0으로 되면
