@@ -1,0 +1,46 @@
+# 문제1. 정렬되지 않은 N개의 수가 주어졌을 때, 퀵 정렬을 이용하여 이 중에서 K번째로 작은 수를 찾아 출력하세요.
+
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[0]
+    left = [x for x in arr[1:] if x < pivot]
+    right = [x for x in arr[1:] if x >= pivot]
+    return quick_sort(left) + [pivot] + quick_sort(right)
+
+arr = [3, 1, 5, 2, 4]
+k = 3
+sorted_arr = quick_sort(arr)
+print(sorted_arr[k-1])
+
+
+# 문제2. 두 개의 배열 A, B가 각각 N개의 정수로 구성되어 있습니다. 최대 K번의 원소 교체 연산을 통해 A 배열의 모든 원소 합을 최대한 크게 만들어야 합니다.
+# 한 번의 교체 연산은 A의 원소 하나와 B의 원소 하나를 서로 바꾸는 것입니다.
+
+# 입력 예시
+
+# N = 5, K = 3  
+# A = [1, 2, 5, 4, 3]  
+# B = [5, 5, 6, 6, 5]
+
+# 출력 예시
+
+# 26
+# (A = [6, 6, 5, 4, 3] )
+
+
+N = 5
+K = 3
+A = [1, 2, 5, 4, 3]
+B = [5, 5, 6, 6, 5]
+
+A.sort()
+B.sort(reverse=True)
+
+for i in range(K):
+    if A[i] < B[i]:
+        A[i], B[i] = B[i], A[i]
+    else:
+        break
+
+print(sum(A))
